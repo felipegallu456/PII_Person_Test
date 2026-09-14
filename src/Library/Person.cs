@@ -25,7 +25,7 @@ namespace Ucu.Poo.Persons
         public Person(string name, string id)
         {
             this.id = id;
-            this.Name = name;
+            this.name = name;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Ucu.Poo.Persons
 
             set
             {
-                if (!IdUtils.IdIsValid(value))
+                if (IdUtils.IdIsValid(value))
                 {
                     this.id = value;
                 }

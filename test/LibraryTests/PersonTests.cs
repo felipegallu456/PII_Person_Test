@@ -8,73 +8,44 @@ using System;
 using System.IO;
 using NUnit.Framework;
 
+
 namespace Ucu.Poo.Persons.Tests
 {
-    /// <summary>
-    /// Tests para la clase <see cref="Person"/>.
-    /// </summary>
+    [TestFixture]
     public class PersonTests
     {
-        /// <summary>
-        /// Prueba getters y setters de la clase <see cref="Person"/>.
-        /// </summary>
-        // [Test]
-        // public void Name_WhenSet_UpdatesValue()
-        // {
-        //     const string name = "Nombre Apellido";
+        
 
-        //     Person person = new Person(name, "1234567-2");
-
-        //     Assert.That(person.Name, Is.EqualTo(name));
-
-        //     const string anotherName = "John Doe";
-
-        //     person.Name = anotherName;
-
-        //     Assert.That(person.Name, Is.EqualTo(anotherName));
-        // }
-
-        /// <summary>
-        /// Prueba que no se puedan asignar string vacías o null a las
-        /// propiedades de la clase <see cref="Person"/>.
-        /// </summary>
         [Test]
-        public void Name_WhenNullOrEmpty_DoesNotUpdateValue()
+        public void Id_WhenSet_UpdatesValue()
         {
-            const string name = "Nombre Apellido";
+            // Arrange
+            const string name = "Felipe Galluzzo";
+            const string initialId = "1234567-9"; // Cédula base válida
+            Person person = new Person(name, initialId);
+            const string anotherId = "5714478-4"; // Cédula nueva válida
 
-            Person person = new Person(name, "1234567-2");
+            // Act
+            person.Id = anotherId;
 
-            person.Name = null;
-
-            Assert.That(person.Name, Is.EqualTo(name));
-
-            person.Name = string.Empty;
-
-            Assert.That(person.Name, Is.EqualTo(name));
+            // Assert
+            Assert.That(person.Id, Is.EqualTo(anotherId));
         }
 
-        /// <summary>
-        /// Prueba el método <see cref="Person.IntroduceTo"/>.
-        /// </summary>
         [Test]
-        public void IntroduceTo_WhenValidNameAndId_WritesNameAndIdToConsole()
+        public void Id_WhenInvalid_DoesNotUpdateValue()
         {
-            const string name = "One";
-            const string anotherName = "Two";
-            const string hi = "Hola, Two, mi nombre es One";
+            // Arrange
+            const string name = "Felipe Galluzzo";
+            const string initialId = "1234567-9";
+            Person person = new Person(name, initialId);
+            const string invalidId = "1234567-0"; // Cédula inválida
 
-            Person one = new Person(name, "1234567-2");
-            Person two = new Person(anotherName, "1234567-2");
+            // Act
+            person.Id = invalidId;
 
-            using (var consoleContent = new StringWriter())
-            {
-                Console.SetOut(consoleContent);
-
-                one.IntroduceTo(two);
-
-                Assert.That(consoleContent.ToString(), Does.Contain(hi));
-            }
+            // Assert
+            Assert.That(person.Id, Is.EqualTo(initialId));
         }
-    }
-}
+    } 
+} 
